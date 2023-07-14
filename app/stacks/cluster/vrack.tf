@@ -12,8 +12,8 @@ data "ovh_order_cart_product_plan" "vrack" {
 
 resource "ovh_vrack" "vrack" {
   ovh_subsidiary = data.ovh_order_cart.card.ovh_subsidiary
-  name           = "kubernetes"
-  description    = "kubernetes"
+  name           = "k8s"
+  description    = "k8s"
 
   plan {
     duration     = data.ovh_order_cart_product_plan.vrack.selected_price.0.duration
