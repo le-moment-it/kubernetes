@@ -1,0 +1,8 @@
+version: '3.4'
+services:
+  kubectld:
+    image: bitnami/kubectl:1.27.3
+    user: ${DOCKER_USER:-1000}
+    working_dir: /app
+    volumes:
+      - ./vault/.kube:/app/.kube

@@ -39,7 +39,7 @@ resource "ovh_cloud_project_kube_nodepool" "node_pool" {
 resource "local_sensitive_file" "kubeconfig" {
   content         = ovh_cloud_project_kube.cluster.kubeconfig
   filename        = "../../../../cluster.kubeconfig"
-  file_permission = "0644"
+  file_permission = "0640"
 
   depends_on = [ovh_cloud_project_kube.cluster, ovh_cloud_project_kube_nodepool.node_pool]
 }

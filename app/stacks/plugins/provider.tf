@@ -13,11 +13,18 @@ provider "kubectl" {
   config_path      = "../../../../cluster.kubeconfig"
 }
 
+provider "tls" {
+
+}
 terraform {
   required_providers {
     kubectl = {
       source  = "gavinbunney/kubectl"
       version = ">= 1.7.0"
+    }
+    tls = {
+      source  = "hashicorp/tls"
+      version = "4.0.4"
     }
   }
 }

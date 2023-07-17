@@ -1,0 +1,38 @@
+---
+applicationsets:
+  - name: apps
+    namespace: argocd
+    generators:
+      - git:
+          repoURL: ${repo_url}
+          revision: HEAD
+          files:
+            - path: "apps/**/*.json"
+    goTemplate: true
+    template:
+      metadata:
+        name: '{{ index .path.segments 1 }}{{ if ne (index .path.segments 1) (index (splitList "." .path.filename) 0) }}-{{ index (splitList "." .path.filename) 0 }}{{ end }}'
+      spec:
+        project: default
+        source:
+          repoURL: '{{ default "${repo_url}" .externalRepoURL }}'
+          targetRevision: HEAD
+          path: "helm/{{ index .path.segments 1 }}"
+          plugin:
+            name: avp-helm
+            env:
+              - name: HELM_ARGS
+                value: "{{ range $i, $value := .valuesFiles }}{{ if $i }} {{ end }}-f ../../apps/{{ index $.path.segments 1 }}/{{ $value }}{{ end }}"
+              - name: AVP_SECRET
+                value: '{{ default "default-vault-credentials" .vaultCredentials }}'
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: '{{ index .path.segments 1 }}{{ if ne (index .path.segments 1) (index (splitList "." .path.filename) 0) }}-{{ index (splitList "." .path.filename) 0 }}{{ end }}'
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: false
+          syncOptions:
+            - CreateNamespace=true
+    syncPolicy:
+      preserveResourcesOnDeletion: false

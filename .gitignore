@@ -37,3 +37,4 @@ terraform.tfvars
 /tmp
 vendor
 app/packer/wordpress/roles
+config/terraform/secret-locals.tf

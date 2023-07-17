@@ -7,7 +7,7 @@ resource "helm_release" "kube-prometheus" {
   chart      = "kube-prometheus-stack"
 
   values = [templatefile("./src/prom-grafana-values.yml.tftpl", {
-    hostname               = "grafana.vasseurlaurent.com"
+    hostname               = "grafana.stream.vasseurlaurent.com"
     issuer                 = "letsencrypt-prod"
     grafana_admin_password = "laurent"
   })]

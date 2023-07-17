@@ -7,3 +7,8 @@ variable "issuers" {
   }))
   description = "List of issuers to create"
 }
+
+variable "vault_api_domain" {
+  type        = string
+  description = "API domain for vault"
+}

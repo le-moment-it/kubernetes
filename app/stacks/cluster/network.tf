@@ -12,7 +12,7 @@ resource "openstack_networking_network_v2" "private_network" {
 
 resource "openstack_networking_subnet_v2" "subnet" {
   network_id      = openstack_networking_network_v2.private_network.id
-  region          = "GRA9"
+  region          = "SGP1"
   name            = "subnet"
   cidr            = "192.168.12.0/24"
   enable_dhcp     = true

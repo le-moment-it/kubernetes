@@ -13,3 +13,4 @@ issuers = [
   }
 ]
 
+vault_api_domain = "vault.stream.vasseurlaurent.com"
